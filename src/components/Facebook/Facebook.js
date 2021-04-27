@@ -9,7 +9,13 @@ export default class Facebook extends Component {
     picture: "",
   };
   responseFacebook = (res) => {
-    console.log(res);
+    this.setState({
+      isLoggedIn: true,
+      userId: res.userId,
+      name: res.name,
+      email: res.email,
+      picture: res.picture.data.url,
+    });
   };
   componentClicked = () => {
     console.log("clicked");
@@ -17,15 +23,27 @@ export default class Facebook extends Component {
   render() {
     let fbContent;
     if (this.state.isLoggedIn) {
-      fbContent = null;
+      fbContent = (
+        <div
+          style={{
+            width: "400px",
+            margin: "auto",
+            background: "grey",
+            padding: "20px",
+          }}
+        >
+          <img src={this.state.picture} alt={this.state.name} />
+          <h4>Welcome {this.state.name} </h4>
+        </div>
+      );
     } else {
       fbContent = (
         <FacebookLogin
           appId="402629930511006"
-          autoLoad={true}
+          autoLoad={false}
           fields="name,email,picture"
-          onClick={componentClicked}
-          callback={responseFacebook}
+          onClick={this.componentClicked}
+          callback={this.responseFacebook}
         />
       );
     }
