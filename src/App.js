@@ -36,7 +36,7 @@ class App extends Component {
           }}
         >
           <img src={this.state.picture} alt={this.state.name} />
-          <h2>Welcome {this.state.name}</h2>
+          <h4>Welcome {this.state.name} </h4>
         </div>
       );
     } else {
